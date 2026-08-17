@@ -1,0 +1,16 @@
+# AI tooling artifacts - never ship these
+.claude/
+.superpowers/
+
+# Personal reference material - not for version control
+Application Assistance.odt
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+
+# Node/Vercel (once the backend is added)
+node_modules/
+.vercel/
+.env
+.env.local
