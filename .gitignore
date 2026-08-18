@@ -9,6 +9,9 @@ Application Assistance.odt
 .DS_Store
 Thumbs.db
 
+# Local worktrees used for isolated feature work
+.worktrees/
+
 # Node/Vercel (once the backend is added)
 node_modules/
 .vercel/
