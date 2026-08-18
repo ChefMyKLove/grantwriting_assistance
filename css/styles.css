@@ -139,3 +139,12 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
   .door-item{transition:none;opacity:1;transform:none;}
   .mini-door{transition:none;}
 }
+
+/* ---- Camera-swoop flash: iris expands from the clicked door's own
+   on-screen position (set via inline clip-path in JS) ---- */
+#door-flash{
+  position:fixed;inset:0;z-index:999;pointer-events:none;
+  background:radial-gradient(circle, var(--cream) 0%, var(--gold-glow) 55%, rgba(224,158,90,0.92) 100%);
+  clip-path:circle(0px at 50% 50%);
+  opacity:1;
+}
