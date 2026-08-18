@@ -143,7 +143,30 @@
     <h2 class="section-title">Why me</h2>
     <p class="why-me-copy">I&rsquo;ve been through this process myself &mdash; the portal, the Self-ID form, the Log a Case screen, the wording that actually gets a request approved. I know what Canada Council&rsquo;s reviewers are looking for in that description field, and I know exactly what a third party can and can&rsquo;t do inside your account, because I&rsquo;ve worked within those limits directly.</p>
   </section>
-  <!-- INTAKE_PLACEHOLDER: Task 12 -->
+  <section class="wrap" id="intake-section">
+    <h2 class="section-title">Start here</h2>
+    <p class="section-intro">Tell me a bit about your project and deadline. I&rsquo;ll follow up with next steps, including the Self-ID form and how to name me as your support person.</p>
+    <form class="intake-box" id="intakeForm">
+      <div class="intake-field">
+        <label for="i-name">Name</label>
+        <input type="text" id="i-name" name="name" required>
+      </div>
+      <div class="intake-field">
+        <label for="i-email">Email</label>
+        <input type="email" id="i-email" name="email" required>
+      </div>
+      <div class="intake-field">
+        <label for="i-grant">Grant type / deadline (if known)</label>
+        <input type="text" id="i-grant" name="grant_type" placeholder="e.g. Concept to Realization, Nov 2026">
+      </div>
+      <div class="intake-field">
+        <label for="i-details">A bit about your project</label>
+        <textarea id="i-details" name="project_description"></textarea>
+      </div>
+      <button class="btn-primary" type="submit">Send</button>
+      <p class="intake-status" id="intakeStatus" role="status" aria-live="polite" hidden></p>
+    </form>
+  </section>
 </main>
 
 <!-- FOOTER_PLACEHOLDER: Task 13 -->
@@ -153,5 +176,6 @@
 <script type="module" src="js/accessibility.js"></script>
 <script type="module" src="js/doors.js"></script>
 <script type="module" src="js/door-swoop.js"></script>
+<script type="module" src="js/intake-form.js"></script>
 </body>
 </html>
