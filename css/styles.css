@@ -168,3 +168,6 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 .services-alt h3{font-size:16px;margin-bottom:8px;}
 .services-alt p{font-size:14px;color:var(--sub);}
 .services-alt a{color:var(--terracotta);font-weight:700;}
+
+/* ---- Why me ---- */
+.why-me-copy{font-size:16px;line-height:1.7;color:var(--sub);max-width:62ch;margin-bottom:40px;}
