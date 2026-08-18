@@ -159,3 +159,12 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 @media (max-width:700px){
   .steps{grid-template-columns:1fr;}
 }
+
+/* ---- Services & covered hours ---- */
+.services-table{width:100%;border-collapse:collapse;margin:20px 0 30px;font-size:14.5px;}
+.services-table th, .services-table td{text-align:left;padding:12px 14px;border-bottom:1px solid rgba(43,38,32,0.14);}
+.services-table th{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--sub);font-weight:700;}
+.services-alt{background:var(--card);border-radius:12px;padding:22px;margin-bottom:40px;}
+.services-alt h3{font-size:16px;margin-bottom:8px;}
+.services-alt p{font-size:14px;color:var(--sub);}
+.services-alt a{color:var(--terracotta);font-weight:700;}
