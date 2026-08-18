@@ -7,6 +7,8 @@
   --terracotta:#C1663D;
   --moss:#6B7A5E;
   --gold-glow: rgba(224,158,90,0.55);
+  --cream-rgb: 250,243,231;
+  --ink-rgb: 43,38,32;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -35,4 +37,30 @@ h1, h2, h3{font-family:'Fraunces', serif; font-weight:500;}
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
   *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+
+/* ---- Nav + accessibility toolbar ---- */
+#site-nav{position:sticky;top:0;z-index:20;background:rgba(var(--cream-rgb),0.94);backdrop-filter:blur(6px);border-bottom:1px solid rgba(var(--ink-rgb),0.12);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
+.nav-right{display:flex;align-items:center;gap:12px;position:relative;}
+.nav-cta{font-weight:700;font-size:13.5px;background:var(--terracotta);color:#fff;padding:9px 16px;border-radius:20px;text-decoration:none;}
+.a11y-btn{display:flex;align-items:center;gap:7px;background:var(--card);border:1.5px solid rgba(var(--ink-rgb),0.25);border-radius:20px;padding:8px 14px;font-weight:700;font-size:13px;color:var(--ink);cursor:pointer;font-family:inherit;}
+.a11y-key{display:inline-block;transition:transform 0.35s cubic-bezier(.2,1.4,.4,1);}
+.a11y-btn[aria-expanded="true"] .a11y-key{transform:rotate(50deg);}
+.a11y-panel{position:absolute;top:calc(100% + 10px);right:120px;background:var(--cream);border:1.5px solid rgba(var(--ink-rgb),0.25);border-radius:14px;padding:16px;width:250px;box-shadow:0 12px 30px rgba(0,0,0,0.14);z-index:21;}
+.a11y-panel[hidden]{display:none;}
+.a11y-panel-title{font-family:'Atkinson Hyperlegible',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;color:var(--sub);}
+.a11y-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(var(--ink-rgb),0.12);font-size:13.5px;font-weight:700;}
+.a11y-row:last-child{border-bottom:none;}
+.a11y-seg{display:flex;gap:4px;}
+.a11y-seg button{border:1.5px solid var(--ink);background:var(--cream);border-radius:6px;padding:4px 8px;font-size:12px;font-family:inherit;cursor:pointer;}
+
+/* States applied to <body> by js/accessibility.js */
+body.a11y-text-sm{ font-size:15px; }
+body.a11y-text-md{ font-size:17px; }
+body.a11y-text-lg{ font-size:20px; }
+body.a11y-high-contrast{ --cream:#FFFFFF; --card:#F0F0F0; --ink:#000000; --sub:#222222; --terracotta:#A8391F; }
+body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2, body.a11y-dyslexia-font h3{
+  font-family: 'Comic Sans MS', 'Atkinson Hyperlegible', sans-serif;
 }
