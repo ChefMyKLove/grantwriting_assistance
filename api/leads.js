@@ -36,7 +36,11 @@ export default async function handler(req, res) {
     await client.sql`COMMIT`;
     res.status(201).json({ id: leadId, status: 'received' });
   } catch (err) {
-    await client.sql`ROLLBACK`;
+    try {
+      await client.sql`ROLLBACK`;
+    } catch (rollbackErr) {
+      console.error('Rollback failed:', rollbackErr);
+    }
     console.error('Failed to create lead:', err);
     res.status(500).json({ error: 'Something went wrong. Please try again or email directly.' });
   } finally {
