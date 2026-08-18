@@ -1,5 +1,5 @@
 // api/leads.js
-import { sql } from '../lib/db.js';
+import { db } from '@vercel/postgres';
 import { validateLeadPayload, defaultCaseForLead } from '../lib/lead-pure.js';
 
 export default async function handler(req, res) {
@@ -16,8 +16,11 @@ export default async function handler(req, res) {
 
   const { name, email, grant_type = null, project_description = null } = req.body;
 
+  const client = await db.connect();
   try {
-    const leadResult = await sql`
+    await client.sql`BEGIN`;
+
+    const leadResult = await client.sql`
       INSERT INTO leads (name, email, grant_type, project_description)
       VALUES (${name}, ${email}, ${grant_type}, ${project_description})
       RETURNING id
@@ -25,14 +28,18 @@ export default async function handler(req, res) {
     const leadId = leadResult.rows[0].id;
 
     const defaultCase = defaultCaseForLead(leadId);
-    await sql`
+    await client.sql`
       INSERT INTO cases (lead_id, grant_name, hour_cap_tier, hours_used, case_number, deadline, submission_status)
       VALUES (${defaultCase.lead_id}, ${defaultCase.grant_name}, ${defaultCase.hour_cap_tier}, ${defaultCase.hours_used}, ${defaultCase.case_number}, ${defaultCase.deadline}, ${defaultCase.submission_status})
     `;
 
+    await client.sql`COMMIT`;
     res.status(201).json({ id: leadId, status: 'received' });
   } catch (err) {
+    await client.sql`ROLLBACK`;
     console.error('Failed to create lead:', err);
     res.status(500).json({ error: 'Something went wrong. Please try again or email directly.' });
+  } finally {
+    client.release();
   }
 }
