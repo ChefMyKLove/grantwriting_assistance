@@ -96,3 +96,46 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 @media (prefers-reduced-motion: reduce){
   .hero-door, .hero-door-light{transition:none;}
 }
+
+/* ---- Which door is yours ---- */
+.section-title{font-size:11px;font-weight:700;margin:0 0 8px;color:var(--sub);text-transform:uppercase;letter-spacing:0.08em;}
+.section-intro{color:var(--sub);font-size:14px;margin-bottom:20px;max-width:52ch;}
+.doors-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.door-item{
+  background:var(--card);border-radius:8px 8px 4px 4px;padding:20px 14px 16px;text-align:center;
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.6s ease, transform 0.6s ease;
+  position:relative;cursor:pointer;
+}
+.door-item.revealed{opacity:1;transform:translateY(0);}
+.door-item .field-num{position:absolute;top:10px;left:12px;font-size:10px;font-weight:700;color:var(--sub);opacity:0.6;}
+.door-item:nth-child(1) .mini-door{background:linear-gradient(160deg, var(--moss), #7d8d6f);}
+.door-item:nth-child(2) .mini-door{background:linear-gradient(160deg, var(--moss), #6f8d82);}
+.door-item:nth-child(3) .mini-door{background:linear-gradient(160deg, var(--moss), #8d8368);}
+.door-item:nth-child(4) .mini-door{background:linear-gradient(160deg, var(--moss), #7d7a8d);}
+
+.door-frame{width:44px;height:64px;margin:0 auto 12px;position:relative;perspective:220px;}
+.door-light{position:absolute;inset:0;border-radius:50% 50% 6% 6% / 26% 26% 3% 3%;background:radial-gradient(circle at 50% 60%, var(--gold-glow) 0%, rgba(224,158,90,0) 75%);opacity:0;transition:opacity 0.4s ease 0.15s;}
+.door-item.open .door-light{opacity:1;}
+.mini-door{width:100%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform 0.5s cubic-bezier(.5,0,.3,1);}
+.door-item.open .mini-door{transform:rotateY(-110deg);}
+
+.door-item .label{font-weight:700;font-size:13px;line-height:1.3;transition:opacity 0.2s ease;}
+.door-item.open .label{opacity:0;}
+.door-item .desc{
+  position:absolute;left:14px;right:14px;top:84px;
+  font-size:11.5px;line-height:1.4;color:var(--sub);
+  opacity:0;transition:opacity 0.35s ease 0.3s;
+}
+.door-item.open .desc{opacity:1;}
+
+.doors-cta-row{text-align:center;margin-top:8px;padding-bottom:20px;}
+
+@media (max-width:700px){
+  .doors-row{grid-template-columns:repeat(2,1fr);}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .door-item{transition:none;opacity:1;transform:none;}
+  .mini-door{transition:none;}
+}
