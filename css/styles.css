@@ -1,0 +1,38 @@
+/* grants.chefmyklove - base styles */
+:root{
+  --cream:#FAF3E7;
+  --card:#F3E9D8;
+  --ink:#2B2620;
+  --sub:#5c5245;
+  --terracotta:#C1663D;
+  --moss:#6B7A5E;
+  --gold-glow: rgba(224,158,90,0.55);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Atkinson Hyperlegible', sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 40px;}
+h1, h2, h3{font-family:'Fraunces', serif; font-weight:500;}
+.eyebrow{font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--terracotta);}
+.skip-link{
+  position:absolute; left:-9999px; top:auto;
+  background:var(--ink); color:var(--cream); padding:10px 16px; z-index:100;
+}
+.skip-link:focus{ left:16px; top:16px; }
+:focus-visible{ outline:3px solid var(--terracotta); outline-offset:2px; }
+
+@media (max-width:700px){
+  .wrap{ padding:0 20px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
