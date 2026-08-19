@@ -1,0 +1,12 @@
+:root{ --ink:#2B2620; --sub:#5c5245; --cream:#FAF3E7; --card:#F3E9D8; --terracotta:#C1663D; }
+*{box-sizing:border-box;}
+body{font-family:'Atkinson Hyperlegible', sans-serif; background:var(--cream); color:var(--ink); margin:0; padding:24px;}
+#loginView{max-width:320px; margin:80px auto;}
+#loginForm{display:flex; flex-direction:column; gap:10px;}
+#loginForm input{padding:10px; font-size:15px;}
+#loginForm button{padding:10px; background:var(--terracotta); color:#fff; border:none; cursor:pointer;}
+#loginError{color:#a8391f; font-size:13px;}
+header{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;}
+table{width:100%; border-collapse:collapse; font-size:13.5px;}
+th, td{text-align:left; padding:8px 10px; border-bottom:1px solid rgba(43,38,32,0.15);}
+input[type="text"], input[type="number"], input[type="date"]{width:100%; padding:6px; font-size:13px;}

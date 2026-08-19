@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — grants.chefmyklove</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div id="loginView">
+  <form id="loginForm">
+    <h1>Admin login</h1>
+    <label for="loginPassword">Password</label>
+    <input type="password" id="loginPassword" required>
+    <button type="submit">Log in</button>
+    <p id="loginError" hidden></p>
+  </form>
+</div>
+
+<div id="dashboardView" hidden>
+  <header>
+    <h1>Leads &amp; cases</h1>
+    <button id="logoutBtn" type="button">Log out</button>
+  </header>
+  <table id="leadsTable">
+    <thead>
+      <tr>
+        <th>Name</th><th>Email</th><th>Grant type</th><th>Submitted</th><th>Case #</th>
+        <th>Hours used</th><th>Deadline</th><th>Status</th><th></th>
+      </tr>
+    </thead>
+    <tbody id="leadsBody"></tbody>
+  </table>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
