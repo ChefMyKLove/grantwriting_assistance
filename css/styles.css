@@ -180,3 +180,8 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 .intake-field textarea{min-height:90px;resize:vertical;}
 .intake-box button[type="submit"]{width:100%;margin-top:4px;}
 .intake-status{margin-top:14px;font-size:13.5px;color:var(--sub);}
+
+/* ---- Footer ---- */
+.site-footer{padding:40px 0;border-top:1px solid rgba(43,38,32,0.14);font-size:13px;color:var(--sub);}
+.footer-inner{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;}
+.footer-inner a{color:var(--terracotta);font-weight:700;}
