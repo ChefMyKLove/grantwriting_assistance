@@ -5,10 +5,10 @@ const status = document.getElementById('intakeStatus');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const payload = {
-    name: form.name.value,
-    email: form.email.value,
-    grant_type: form.grant_type.value,
-    project_description: form.project_description.value
+    name: form.elements.name.value,
+    email: form.elements.email.value,
+    grant_type: form.elements.grant_type.value,
+    project_description: form.elements.project_description.value
   };
 
   status.hidden = false;

@@ -39,6 +39,12 @@ h1, h2, h3{font-family:'Fraunces', serif; font-weight:500;}
   *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
 }
 
+:root[data-reduce-motion="true"] *{
+  animation-duration:0.001ms !important;
+  animation-iteration-count:1 !important;
+  transition-duration:0.001ms !important;
+}
+
 /* ---- Nav + accessibility toolbar ---- */
 #site-nav{position:sticky;top:0;z-index:20;background:rgba(var(--cream-rgb),0.94);backdrop-filter:blur(6px);border-bottom:1px solid rgba(var(--ink-rgb),0.12);}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;}

@@ -71,7 +71,7 @@ leadsBody.addEventListener('click', async (e) => {
   const row = btn.closest('tr');
   const payload = {};
   row.querySelectorAll('[data-field]').forEach((el) => {
-    payload[el.dataset.field] = el.value;
+    payload[el.dataset.field] = el.value === '' ? null : el.value;
   });
 
   const res = await fetch(`/api/admin/cases/${caseId}`, {
