@@ -1,5 +1,5 @@
 // js/doors.js
-import { computeRevealDelay, clampUnit, computeTiltTransform, computeGlareOffset } from './doors-pure.js';
+import { computeRevealDelay, clampUnit, computeTiltTransform, computeGlareOffset, pickInspirationMessage } from './doors-pure.js';
 
 const reduceMotion = document.documentElement.getAttribute('data-reduce-motion') === 'true'
   || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -22,7 +22,12 @@ if (reduceMotion) {
 }
 
 function toggleOpen(d) {
+  const opening = !d.classList.contains('open');
   d.classList.toggle('open');
+  if (opening) {
+    const affirmationEl = d.querySelector('[data-affirmation]');
+    if (affirmationEl) affirmationEl.textContent = pickInspirationMessage(Math.random);
+  }
 }
 
 doorItems.forEach((d) => {

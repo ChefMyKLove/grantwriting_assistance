@@ -22,12 +22,12 @@ form.addEventListener('submit', async (e) => {
     });
     const data = await res.json();
     if (res.ok) {
-      status.textContent = "Thanks — I'll be in touch soon.";
+      status.textContent = "Thanks, I'll be in touch soon.";
       form.reset();
     } else {
       status.textContent = (data && data.error) || 'Something went wrong. Please try again or email me directly.';
     }
   } catch (err) {
-    status.textContent = "Something didn't send — email chefmyklove@gmail.com directly and I'll get it.";
+    status.textContent = "Something didn't send. Email grants@chefmyklove.com directly and I'll get it.";
   }
 });

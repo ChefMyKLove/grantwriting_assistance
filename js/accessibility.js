@@ -11,8 +11,8 @@ const dyslexiaBox = document.getElementById('a11yDyslexia');
 let prefs = readPreferences(storage);
 
 function applyPrefs() {
-  document.body.classList.remove('a11y-text-sm', 'a11y-text-md', 'a11y-text-lg');
-  document.body.classList.add(textSizeClass(prefs.textSize));
+  document.documentElement.classList.remove('a11y-text-sm', 'a11y-text-md', 'a11y-text-lg');
+  document.documentElement.classList.add(textSizeClass(prefs.textSize));
   document.body.classList.toggle('a11y-high-contrast', prefs.highContrast);
   document.body.classList.toggle('a11y-dyslexia-font', prefs.dyslexiaFont);
   document.documentElement.setAttribute('data-reduce-motion', prefs.reduceMotion ? 'true' : 'false');
