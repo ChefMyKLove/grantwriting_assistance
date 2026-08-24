@@ -9,6 +9,7 @@
   --gold-glow: rgba(224,158,90,0.55);
   --cream-rgb: 250,243,231;
   --ink-rgb: 43,38,32;
+  --gold-rgb: 224,158,90;
   /* Ivy-covered wooden door, used for the hero background, the hero
      door, and all four small doors - one continuous scene rather than
      separate flat-color shapes. Photo: Katelyn G on Unsplash, free to
@@ -270,10 +271,21 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 .section-title, .section-intro, .why-me-copy{
   position:relative;isolation:isolate;
 }
-.section-intro::before, .why-me-copy::before{
+.section-intro::before{
   content:"";position:absolute;z-index:-1;
   inset:-14px -22px;
   background:radial-gradient(ellipse 62% 70% at center, rgba(var(--cream-rgb),0.9) 0%, rgba(var(--cream-rgb),0.55) 45%, rgba(var(--cream-rgb),0) 100%);
+  filter:blur(8px);
+  pointer-events:none;
+}
+/* Why-me runs three full paragraphs of left-aligned copy - a centered
+   ellipse left the left edge (where every line starts) under-covered.
+   Extra left inset plus shifting the gradient's center leftward keeps
+   the haze strong exactly where the text actually begins. */
+.why-me-copy::before{
+  content:"";position:absolute;z-index:-1;
+  inset:-14px -22px -14px -40px;
+  background:radial-gradient(ellipse 70% 75% at 38% 50%, rgba(var(--cream-rgb),0.92) 0%, rgba(var(--cream-rgb),0.6) 45%, rgba(var(--cream-rgb),0) 100%);
   filter:blur(8px);
   pointer-events:none;
 }
@@ -372,20 +384,45 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
   .door-behind{transition:none;}
 }
 
-/* ---- Camera-swoop flash: iris expands from the clicked door's own
-   on-screen position (set via inline clip-path in JS) ---- */
+/* ---- Door-open swoop: "Smolder Pulse" ----
+   A dim glow (this element) and a swarm of embers (#swoop-particles,
+   drawn on canvas by js/hero-swoop.js / js/doors-swoop.js using the pure
+   math in js/door-swoop-pure.js) both travel outward from the clicked
+   door's on-screen position, arriving together instead of the old
+   clip-path circle that just wiped the screen instantly. Background and
+   opacity are set inline by JS per-fire (position depends on the click),
+   so this rule only carries the resting/shared state. */
 #door-flash{
+  position:fixed;inset:0;z-index:998;pointer-events:none;
+  opacity:0;
+}
+#swoop-particles{
   position:fixed;inset:0;z-index:999;pointer-events:none;
-  background:radial-gradient(circle, var(--cream) 0%, var(--gold-glow) 55%, rgba(224,158,90,0.92) 100%);
-  clip-path:circle(0px at 50% 50%);
-  opacity:1;
+}
+/* Rainbow recolor: same gradient shape as the gold default, just swept
+   through hue via filter - one full rotation over the swoop's own
+   duration (animation-duration set inline in JS to match). */
+@keyframes door-flash-hue-pulse{
+  0%{ filter:hue-rotate(0deg); }
+  100%{ filter:hue-rotate(360deg); }
+}
+#door-flash.rainbow{
+  animation-name:door-flash-hue-pulse;
+  animation-timing-function:linear;
+  animation-iteration-count:1;
 }
 /* On doors.html only: the page loads already fully covered by this same
    flash (continuing the hero page's swoosh across the navigation)
-   instead of starting hidden - js/doors-swoop.js fades it away on load. */
-#door-flash.page-enter-cover{clip-path:none;opacity:1;}
+   instead of starting hidden - js/doors-swoop.js fades it away on load.
+   No click position to anchor to here, so this is a plain centered
+   cover rather than the per-fire JS-computed gradient. */
+#door-flash.page-enter-cover{
+  opacity:1;
+  background:radial-gradient(circle at 50% 50%, rgba(var(--cream-rgb),0.96) 0%, rgba(var(--gold-rgb),0.55) 55%, rgba(var(--gold-rgb),0.9) 100%);
+}
 @media (prefers-reduced-motion: reduce){
   #door-flash.page-enter-cover{opacity:0;}
+  #door-flash.rainbow{animation:none;}
 }
 
 /* ---- How it works ---- */
@@ -422,6 +459,11 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 
 /* ---- Start here (intake form) ---- */
 .intake-box{background:var(--card);border-radius:16px;padding:36px;max-width:560px;margin:20px auto 60px;}
+/* Honeypot: a real form field a scripted bot will fill and a sighted
+   human never sees. Off-screen (not display:none/visibility:hidden,
+   which some bots skip filling) plus aria-hidden so screen readers
+   skip it too, rather than presenting an unlabeled input. */
+.honeypot-field{position:absolute;left:-9999px;}
 .intake-field{margin-bottom:16px;text-align:left;}
 .intake-field label{display:block;font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--sub);margin-bottom:6px;}
 .intake-field input, .intake-field textarea{width:100%;font-family:inherit;font-size:0.9375rem;padding:11px 13px;border:1.5px solid rgba(43,38,32,0.25);border-radius:8px;background:var(--cream);color:var(--ink);}

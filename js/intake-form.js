@@ -1,6 +1,15 @@
 // js/intake-form.js
+import { isSpamSubmission } from '../lib/lead-pure.js';
+
 const form = document.getElementById('intakeForm');
 const status = document.getElementById('intakeStatus');
+const submitBtn = document.getElementById('intakeSubmitBtn');
+const loadedAt = Date.now();
+
+// JS-required gate: the button starts disabled in the markup, so only a
+// browser that actually runs this script (i.e. not most scraper bots)
+// ever gets to submit at all.
+submitBtn.disabled = false;
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -8,8 +17,16 @@ form.addEventListener('submit', async (e) => {
     name: form.elements.name.value,
     email: form.elements.email.value,
     grant_type: form.elements.grant_type.value,
-    project_description: form.elements.project_description.value
+    project_description: form.elements.project_description.value,
+    _gotcha: form.elements._gotcha.value,
+    _loadedAt: loadedAt
   };
+
+  if (isSpamSubmission(payload, Date.now())) {
+    status.hidden = false;
+    status.textContent = 'Please take a moment to review your project details before sending.';
+    return;
+  }
 
   status.hidden = false;
   status.textContent = 'Sending…';

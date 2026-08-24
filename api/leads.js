@@ -1,6 +1,6 @@
 // api/leads.js
 import { db } from '@vercel/postgres';
-import { validateLeadPayload, defaultCaseForLead } from '../lib/lead-pure.js';
+import { validateLeadPayload, defaultCaseForLead, isSpamSubmission } from '../lib/lead-pure.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,6 +11,17 @@ export default async function handler(req, res) {
   const { valid, errors } = validateLeadPayload(req.body);
   if (!valid) {
     res.status(400).json({ error: 'Invalid submission', errors });
+    return;
+  }
+
+  // Responds as if the lead were received without ever writing to the
+  // database or revealing what tripped the check - telling a bot which
+  // signal caught it just teaches it to route around that signal next
+  // time. This also covers anything posted straight to this endpoint
+  // without going through the real form at all (see isSpamSubmission's
+  // missing-_loadedAt case).
+  if (isSpamSubmission(req.body, Date.now())) {
+    res.status(201).json({ id: 0, status: 'received' });
     return;
   }
 

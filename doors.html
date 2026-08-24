@@ -115,39 +115,40 @@
       </tbody>
     </table>
     <div class="services-alt">
-      <h3>Don&rsquo;t qualify for Canada Council funding?</h3>
-      <p>I also write grant applications directly, on a sliding scale, for artists and organizations outside this program. <a href="mailto:grants@chefmyklove.com">Email me</a> and tell me about your project.</p>
+      <h3>Don&rsquo;t qualify for Canada Council Grant Assistance Funding?</h3>
+      <p>I&rsquo;m genuinely excited about getting artists funded through the Canada Council programs, and I also offer consulting to help you carve out a granting strategy of your own. If this program isn&rsquo;t the right fit, I still write grant applications directly, on a sliding scale, for artists and organizations outside it. <a href="mailto:grants@chefmyklove.com">Email me</a> and give me some insight into your project.</p>
     </div>
   </section>
   <section class="wrap" id="why-me">
     <h2 class="section-title">Why me</h2>
     <div class="why-me-copy">
       <p>Here&rsquo;s the thing: you&rsquo;re an artist. You should be spending your time on your practice, not wrestling with grant portals at 2am. The Canada Council Self-ID program is accessible, and they want to say yes. The process is designed to be barrier-free, but knowing that doesn&rsquo;t always make it easier to start. That&rsquo;s where I come in.</p>
-      <p>I&rsquo;m here to partner with you to navigate the mundane parts: the forms, the wording, the deadlines. I&rsquo;m not here to decode a secret system. I&rsquo;ve been through this enough that I know how it can feel when your brain won&rsquo;t let you start, or when you can&rsquo;t sustain the attention it takes to finish.</p>
+      <p>I&rsquo;m here to partner with you to navigate the mundane parts: the forms, the wording, the deadlines. I&rsquo;m not here to decode a secret system. The Canada Council wants you to succeed at this and recognizes that people who lack medical privilege may also be in need of help. I&rsquo;ve been through this enough that I know how it can feel when your brain won&rsquo;t let you start, or when you can&rsquo;t sustain the attention it takes to finish.</p>
       <p>I&rsquo;m easy to reach. I stick around until it&rsquo;s done. And since Canada Council pays me for this work, not you, there&rsquo;s no reason not to use me. You focus on the art. I&rsquo;ll focus on getting it funded.</p>
     </div>
   </section>
   <section class="wrap" id="intake-section">
     <h2 class="section-title">Start here</h2>
-    <p class="section-intro">Tell me a bit about your project and deadline. I&rsquo;ll follow up with next steps, including the Self-ID form and how to name me as your support person.</p>
+    <p class="section-intro">Tell me a bit about your project and deadline. I will follow up with next steps, including the Self-ID form and how to name me as your support person.</p>
     <form class="intake-box" id="intakeForm">
+      <input type="text" name="_gotcha" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="intake-field">
         <label for="i-name">Name</label>
-        <input type="text" id="i-name" name="name" required>
+        <input type="text" id="i-name" name="name" required maxlength="200">
       </div>
       <div class="intake-field">
         <label for="i-email">Email</label>
-        <input type="email" id="i-email" name="email" required>
+        <input type="email" id="i-email" name="email" required maxlength="254">
       </div>
       <div class="intake-field">
         <label for="i-grant">Grant type / deadline (if known)</label>
-        <input type="text" id="i-grant" name="grant_type" placeholder="e.g. Concept to Realization, Nov 2026">
+        <input type="text" id="i-grant" name="grant_type" placeholder="e.g. Concept to Realization, Nov 2026" maxlength="200">
       </div>
       <div class="intake-field">
         <label for="i-details">A bit about your project</label>
-        <textarea id="i-details" name="project_description"></textarea>
+        <textarea id="i-details" name="project_description" maxlength="5000"></textarea>
       </div>
-      <button class="btn-primary" type="submit">Send</button>
+      <button class="btn-primary" type="submit" id="intakeSubmitBtn" disabled>Send</button>
       <p class="intake-status" id="intakeStatus" role="status" aria-live="polite" hidden></p>
     </form>
   </section>
@@ -162,6 +163,7 @@
 </footer>
 
 <div id="door-flash" class="page-enter-cover" aria-hidden="true"></div>
+<canvas id="swoop-particles" aria-hidden="true"></canvas>
 
 <script type="module" src="js/accessibility.js"></script>
 <script type="module" src="js/doors.js"></script>
