@@ -63,29 +63,11 @@
       <div class="hero-door-wrap" id="heroDoorWrap">
         <div class="hero-door-light"></div>
         <div class="door-arch hero-door" id="heroDoor">
-          <svg class="door-carved-seal" viewBox="0 0 104 104" aria-hidden="true">
-            <defs>
-              <path id="heroSealTopArc" d="M 14,52 A 38,38 0 0 1 90,52" />
-              <path id="heroSealBottomArc" d="M 14,52 A 38,38 0 0 0 90,52" />
-              <!-- Dual-tone bevel: a faint light offset up-left plus a
-                   darker shadow offset down-right, same carved-into-the-
-                   wood logic as the site's text-shadow-based swaths
-                   elsewhere - SVG text has no text-shadow, so this is
-                   the filter equivalent, chained so both shadows layer
-                   under the source text. -->
-              <filter id="heroSealCarve" x="-60%" y="-60%" width="220%" height="220%">
-                <feDropShadow dx="-0.45" dy="-0.45" stdDeviation="0.1" flood-color="#ffe9c9" flood-opacity="0.5"/>
-                <feDropShadow dx="0.55" dy="0.8" stdDeviation="0.1" flood-color="#000000" flood-opacity="0.55"/>
-              </filter>
-            </defs>
-            <text class="door-carved-seal-text">
-              <textPath href="#heroSealTopArc" startOffset="50%" text-anchor="middle">Click</textPath>
-            </text>
-            <text class="door-carved-seal-text door-carved-seal-text-center" x="52" y="57" text-anchor="middle">to</text>
-            <text class="door-carved-seal-text">
-              <textPath href="#heroSealBottomArc" startOffset="50%" text-anchor="middle" side="right">Enter</textPath>
-            </text>
-          </svg>
+          <div class="door-carved-stack" aria-hidden="true">
+            <span class="door-carved-line door-carved-top">Click</span>
+            <span class="door-carved-line door-carved-mid">to</span>
+            <span class="door-carved-line door-carved-bottom">Enter</span>
+          </div>
         </div>
       </div>
     </div>

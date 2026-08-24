@@ -143,7 +143,7 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 }
 /* Photo lives on its own ::before layer (not the element's own
    background) specifically so it can be mirrored independently of real
-   children like .door-carved-seal below - mirroring .door-arch itself
+   children like .door-carved-stack below - mirroring .door-arch itself
    would also flip that seal's text backwards. scaleX(-1) corrects the
    photo's hinges to the left side, matching .hero-door/.mini-door's
    rotateY(...) transform-origin:left, which is the side these open
@@ -161,30 +161,38 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 }
 .door-arch::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 105%, var(--gold-glow), rgba(224,158,90,0) 65%);mix-blend-mode:screen;}
 
-/* Carved "Click / to / Enter" circular seal - hero door only (.mini-door
-   doors on the doors.html page share .door-arch but never get this
-   markup). Curved via SVG textPath rather than CSS, since only SVG can
-   reliably bend actual glyphs along an arc. The bottom arc's textPath
-   carries side="right" (in the HTML) - without it, SVG renders bottom-
-   arc text upside-down by default; that attribute flips the glyphs
-   upright without disturbing left-to-right reading order. Same carved
-   dual-tone treatment as the rest of the site's door signage: near-
-   transparent ink fill so the photo shows through, dark-down/light-up
-   bevel shadow. z-index lifts it above .door-arch::after's gold glow. */
-.hero-door .door-carved-seal{
-  position:absolute;top:50%;left:50%;z-index:2;
-  transform:translate(-50%,-50%);
-  width:104px;height:104px;
+/* Carved "Click / to / Enter" signage - hero door only (.mini-door doors
+   on the doors.html page share .door-arch but never get this markup).
+   Curved arc text (an earlier version, via SVG textPath) turned out to
+   be the legibility problem itself - small curved glyphs are harder to
+   read than straight ones no matter the font size - so this is three
+   plain, larger, centered lines instead: Click near the top, "to" dead
+   center, Enter near the bottom. Positions clear the door's own arched
+   top (~26% per .door-arch's border-radius) and its much slighter
+   bottom curve (~3-6%), so nothing sits in the curved/narrower part of
+   the shape. Same carved dual-tone treatment as the rest of the site's
+   door signage: near-transparent ink fill so the photo shows through,
+   a light offset up-left plus a dark offset down-right so it reads as
+   chiseled rather than printed on top. z-index lifts it above
+   .door-arch::after's gold glow, which paints with no z-index of its own. */
+.hero-door .door-carved-stack{
+  position:absolute;inset:0;z-index:2;
   pointer-events:none;
-  overflow:visible;
 }
-.door-carved-seal-text{
+.door-carved-line{
+  position:absolute;left:50%;
+  transform:translateX(-50%);
   font-family:'Fraunces',serif;font-variant:small-caps;font-weight:500;
-  font-size:11px;letter-spacing:0.1em;
-  fill:rgba(0,0,0,0.6);
-  filter:url(#heroSealCarve);
+  white-space:nowrap;
+  color:rgba(0,0,0,0.62);
+  text-shadow:0 1px 0 rgba(255,235,205,0.45), 0 2px 3px rgba(0,0,0,0.22);
 }
-.door-carved-seal-text-center{ font-size:9.5px; }
+.door-carved-top{ top:30%; font-size:19px; letter-spacing:0.16em; }
+.door-carved-mid{ top:50%; transform:translate(-50%,-50%); font-size:16px; letter-spacing:0.12em; }
+/* Pulled up from bottom:16% - aiming for just under the doorknob rather
+   than pinned near the bottom edge. Best-effort without seeing the
+   actual photo - nudge further if it's still not landing right. */
+.door-carved-bottom{ bottom:34%; font-size:19px; letter-spacing:0.16em; }
 
 /* ---- Hero ----
    Full-bleed, blurred/dimmed version of the same door photo sits behind
