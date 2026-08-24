@@ -139,15 +139,52 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 .door-arch{
   position:relative;overflow:hidden;
   border-radius:50% 50% 6% 6% / 26% 26% 3% 3%;
+  box-shadow:0 8px 18px rgba(31,27,20,0.26), inset 0 0 0 3px rgba(0,0,0,0.15);
+}
+/* Photo lives on its own ::before layer (not the element's own
+   background) specifically so it can be mirrored independently of real
+   children like .door-carved-seal below - mirroring .door-arch itself
+   would also flip that seal's text backwards. scaleX(-1) corrects the
+   photo's hinges to the left side, matching .hero-door/.mini-door's
+   rotateY(...) transform-origin:left, which is the side these open
+   from - the animation direction was the one worth keeping, so the
+   image is what gets flipped to match it, not the other way around. */
+.door-arch::before{
+  content:"";position:absolute;inset:0;
   background:
     linear-gradient(160deg, rgba(107,122,94,0.38), rgba(107,122,94,0.12) 55%, rgba(0,0,0,0.28) 100%),
     var(--door-photo);
   background-size:cover;
   background-position:center;
   background-blend-mode:multiply, normal;
-  box-shadow:0 8px 18px rgba(31,27,20,0.26), inset 0 0 0 3px rgba(0,0,0,0.15);
+  transform:scaleX(-1);
 }
 .door-arch::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 105%, var(--gold-glow), rgba(224,158,90,0) 65%);mix-blend-mode:screen;}
+
+/* Carved "Click / to / Enter" circular seal - hero door only (.mini-door
+   doors on the doors.html page share .door-arch but never get this
+   markup). Curved via SVG textPath rather than CSS, since only SVG can
+   reliably bend actual glyphs along an arc. The bottom arc's textPath
+   carries side="right" (in the HTML) - without it, SVG renders bottom-
+   arc text upside-down by default; that attribute flips the glyphs
+   upright without disturbing left-to-right reading order. Same carved
+   dual-tone treatment as the rest of the site's door signage: near-
+   transparent ink fill so the photo shows through, dark-down/light-up
+   bevel shadow. z-index lifts it above .door-arch::after's gold glow. */
+.hero-door .door-carved-seal{
+  position:absolute;top:50%;left:50%;z-index:2;
+  transform:translate(-50%,-50%);
+  width:104px;height:104px;
+  pointer-events:none;
+  overflow:visible;
+}
+.door-carved-seal-text{
+  font-family:'Fraunces',serif;font-variant:small-caps;font-weight:500;
+  font-size:11px;letter-spacing:0.1em;
+  fill:rgba(0,0,0,0.6);
+  filter:url(#heroSealCarve);
+}
+.door-carved-seal-text-center{ font-size:9.5px; }
 
 /* ---- Hero ----
    Full-bleed, blurred/dimmed version of the same door photo sits behind
