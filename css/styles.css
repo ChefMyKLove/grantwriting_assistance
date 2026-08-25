@@ -375,11 +375,19 @@ body.a11y-dyslexia-font, body.a11y-dyslexia-font h1, body.a11y-dyslexia-font h2,
 }
 /* The glow itself, separated out as a blurred, bled-out pseudo-element
    rather than a bordered shape on .door-behind directly - no defined
-   edge for the eye to catch, just warmth fading out into the doorway. */
+   edge for the eye to catch, just color fading out into the doorway.
+   Rainbow conic-gradient for the color, matching the door-swoop's
+   Smolder Pulse effect elsewhere on the site - the soft falloff (same
+   0%/45%/72%/100% stops the old single-hue version used) comes from a
+   mask instead of the gradient's own alpha, so it keeps the identical
+   "no hard edge" shape while the color underneath is now a full
+   spectrum instead of one ember tone. */
 .door-behind::before{
   content:"";position:absolute;z-index:-1;
   inset:-24% -34%;
-  background:radial-gradient(ellipse at center, rgba(216,92,48,0.62) 0%, rgba(184,69,46,0.38) 45%, rgba(31,27,20,0.16) 72%, rgba(31,27,20,0) 100%);
+  background:conic-gradient(from 0deg, #ff6b6b, #ffd166, #8ee06c, #5ec8e6, #7d8bf7, #d68af0, #ff6b6b);
+  -webkit-mask-image:radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.18) 72%, rgba(0,0,0,0) 100%);
+  mask-image:radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.18) 72%, rgba(0,0,0,0) 100%);
   filter:blur(11px);
   pointer-events:none;
 }
