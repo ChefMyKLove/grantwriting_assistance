@@ -45,6 +45,7 @@ export default async function handler(req, res) {
     `;
 
     await client.sql`COMMIT`;
+    await notifyNewLead({ name, email, grant_type, project_description });
     res.status(201).json({ id: leadId, status: 'received' });
   } catch (err) {
     try {
@@ -56,5 +57,29 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Something went wrong. Please try again or email directly.' });
   } finally {
     client.release();
+  }
+}
+
+// Emails the new lead to NOTIFY_EMAIL via Resend. The lead is already
+// saved by the time this runs, so a failed email is logged, never surfaced
+// to the person filling in the form.
+async function notifyNewLead({ name, email, grant_type, project_description }) {
+  const { RESEND_API_KEY, NOTIFY_EMAIL } = process.env;
+  if (!RESEND_API_KEY || !NOTIFY_EMAIL) return;
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'Grant Leads <onboarding@resend.dev>',
+        to: NOTIFY_EMAIL,
+        reply_to: email,
+        subject: `New lead: ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\nGrant type / deadline: ${grant_type || '-'}\n\n${project_description || '(no description)'}`,
+      }),
+    });
+    if (!r.ok) console.error('Lead email failed:', r.status, await r.text());
+  } catch (err) {
+    console.error('Lead email failed:', err);
   }
 }
