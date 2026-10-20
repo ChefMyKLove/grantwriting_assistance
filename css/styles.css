@@ -2,13 +2,13 @@
 :root{
   --cream:#FAF3E7;
   --card:#F3E9D8;
-  --ink:#2B2620;
-  --sub:#5c5245;
+  --ink:#14110E;
+  --sub:#24201B;
   --terracotta:#C1663D;
   --moss:#6B7A5E;
   --gold-glow: rgba(224,158,90,0.55);
   --cream-rgb: 250,243,231;
-  --ink-rgb: 43,38,32;
+  --ink-rgb: 20,17,14;
   --gold-rgb: 224,158,90;
   /* Ivy-covered wooden door, used for the hero background, the hero
      door, and all four small doors - one continuous scene rather than

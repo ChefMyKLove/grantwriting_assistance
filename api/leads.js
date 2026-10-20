@@ -1,5 +1,5 @@
 // api/leads.js
-import { db } from '@vercel/postgres';
+import { db } from '../lib/db.js';
 import { validateLeadPayload, defaultCaseForLead, isSpamSubmission } from '../lib/lead-pure.js';
 
 export default async function handler(req, res) {
