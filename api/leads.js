@@ -71,7 +71,7 @@ async function notifyNewLead({ name, email, grant_type, project_description }) {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: 'Grant Leads <onboarding@resend.dev>',
+        from: 'Grant Leads <leads@mail.chefmyklove.com>',
         to: NOTIFY_EMAIL,
         reply_to: email,
         subject: `New lead: ${name}`,
